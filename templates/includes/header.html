@@ -1,0 +1,25 @@
+<header class="site-header" x-data="{open:false}">
+  <div class="container nav-shell">
+    <a href="/" class="brand" aria-label="Al Wahda home">
+      <span class="brand-mark">AW</span>
+      <span>
+        <strong>Al Wahda</strong>
+        <small>Building Materials Trading</small>
+      </span>
+    </a>
+
+    <button class="mobile-toggle" @click="open=!open" :aria-expanded="open.toString()" aria-label="Toggle navigation">
+      Menu
+    </button>
+
+    <nav class="main-nav" :class="open ? 'show' : ''">
+      <a href="/{{ lang_suffix }}" {% if request.path == '/' %}class="active"{% endif %}>{% if lang == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
+      <a href="/products/{{ lang_suffix }}" {% if '/products/' in request.path %}class="active"{% endif %}>{% if lang == 'ar' %}المنتجات{% else %}Products{% endif %}</a>
+      <a href="/industries/{{ lang_suffix }}" {% if '/industries/' in request.path %}class="active"{% endif %}>{% if lang == 'ar' %}القطاعات{% else %}Industries{% endif %}</a>
+      <a href="/resources/{{ lang_suffix }}" {% if '/resources/' in request.path %}class="active"{% endif %}>{% if lang == 'ar' %}الموارد{% else %}Resources{% endif %}</a>
+      <a href="/contact/{{ lang_suffix }}" {% if '/contact/' in request.path %}class="active"{% endif %}>{% if lang == 'ar' %}تواصل{% else %}Contact{% endif %}</a>
+      <a href="?lang={% if lang == 'ar' %}en{% else %}ar{% endif %}" class="lang-switch">{% if lang == 'ar' %}EN{% else %}AR{% endif %}</a>
+      <a href="{{ company_whatsapp }}" class="btn btn-sm">{% if lang == 'ar' %}عرض سعر واتساب{% else %}WhatsApp Quote{% endif %}</a>
+    </nav>
+  </div>
+</header>

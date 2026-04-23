@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">{{ page_copy.eyebrow }}</p>
+    <h1>{{ page_copy.title }}</h1>
+    <p class="lead">{{ page_copy.lead }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <article class="contact-card">
+      <h2>{{ page_copy.quick }}</h2>
+      <p><strong>{{ page_copy.phone }}:</strong> <a href="tel:{{ company_phone|cut:' ' }}">{{ company_phone }}</a></p>
+      <p><strong>{{ page_copy.email }}:</strong> <a href="mailto:{{ company_email }}">{{ company_email }}</a></p>
+      <p><strong>{{ page_copy.whatsapp }}:</strong> <a href="{{ company_whatsapp }}">{{ page_copy.whatsapp }}</a></p>
+      <p><strong>{{ page_copy.address }}:</strong> {{ company_address }}</p>
+    </article>
+
+    <article class="contact-card">
+      <h2>{{ page_copy.send }}</h2>
+      <p>{{ page_copy.format }}</p>
+      <ol>
+        {% for point in page_copy.points %}
+        <li>{{ point }}</li>
+        {% endfor %}
+      </ol>
+      <a class="btn" href="mailto:{{ company_email }}?subject=Material%20Requirement%20-%20Al%20Wahda">{{ page_copy.email_btn }}</a>
+    </article>
+  </div>
+</section>
+{% endblock %}

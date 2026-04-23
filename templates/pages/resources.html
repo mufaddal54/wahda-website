@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">{{ page_copy.eyebrow }}</p>
+    <h1>{{ page_copy.title }}</h1>
+    <p class="lead">{{ page_copy.lead }}</p>
+  </div>
+</section>
+
+<section class="section" x-data="{q: '{{ active_q }}'}">
+  <div class="container">
+    <form class="resource-toolbar" method="get" action="/resources/">
+      <label for="q" class="sr-only">Search resources</label>
+      <input id="q" name="q" placeholder="{{ page_copy.search_placeholder }}" value="{{ active_q }}">
+      <input type="hidden" name="lang" value="{{ lang }}">
+      <label for="tag" class="sr-only">Filter by tag</label>
+      <select id="tag" name="tag">
+        <option value="">{{ page_copy.all_tags }}</option>
+        {% for tag in all_tags %}
+        <option value="{{ tag|lower }}" {% if active_tag == tag|lower %}selected{% endif %}>{{ tag }}</option>
+        {% endfor %}
+      </select>
+      <button class="btn" type="submit">{{ page_copy.filter_btn }}</button>
+    </form>
+
+    <div class="resource-grid">
+      {% for article in localized_resources %}
+      <article class="resource-card">
+        <p class="meta">{{ article.date|date:'d M Y' }} · {{ article.reading_time }}</p>
+        <h2><a href="/resources/{{ article.slug }}/{{ lang_suffix }}">{{ article.title }}</a></h2>
+        <p>{{ article.description }}</p>
+        <div class="chip-row">
+          {% for tag in article.tags %}
+          <span class="chip">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </article>
+      {% empty %}
+      <article class="resource-card">
+        <h2>{{ page_copy.empty_title }}</h2>
+        <p>{{ page_copy.empty_text }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

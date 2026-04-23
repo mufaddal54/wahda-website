@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">{{ home_copy.eyebrow }}</p>
+      <h1>{{ home_copy.title }}</h1>
+      <p class="lead">{{ home_copy.lead }}</p>
+      <div class="hero-actions">
+        <a href="/products/{{ lang_suffix }}" class="btn">{{ home_copy.cta1 }}</a>
+        <a href="/contact/{{ lang_suffix }}" class="btn btn-outline">{{ home_copy.cta2 }}</a>
+      </div>
+      <ul class="keyword-pills">
+        {% for keyword in hero_keywords %}
+        <li>{{ keyword }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="hero-panel">
+      <h2>{{ home_copy.panel_title }}</h2>
+      <ul>
+        {% for point in home_copy.panel_points %}
+        <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ home_copy.breadth_eyebrow }}</p>
+      <h2>{{ home_copy.breadth_title }}</h2>
+    </div>
+    <div class="category-grid">
+      {% for category in product_categories %}
+      <article class="category-card">
+        <h3>{% if lang == 'ar' %}{{ category.name_ar }}{% else %}{{ category.name_en }}{% endif %}</h3>
+        <p>{% if lang == 'ar' %}{{ category.summary_ar }}{% else %}{{ category.summary_en }}{% endif %}</p>
+        <ul>
+          {% if lang == 'ar' %}
+          {% for item in category.items_ar %}
+          <li>{{ item }}</li>
+          {% endfor %}
+          {% else %}
+          {% for item in category.items_en %}
+          <li>{{ item }}</li>
+          {% endfor %}
+          {% endif %}
+        </ul>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{{ home_copy.faq_eyebrow }}</p>
+      <h2>{{ home_copy.faq_title }}</h2>
+    </div>
+    <div class="faq-list" x-data="{open: null}">
+      {% for faq in faqs %}
+      <article class="faq-item">
+        <button @click="open === {{ forloop.counter0 }} ? open = null : open = {{ forloop.counter0 }}" :aria-expanded="(open === {{ forloop.counter0 }}).toString()">
+          {{ faq.question }}
+        </button>
+        <div x-show="open === {{ forloop.counter0 }}">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>{{ home_copy.cta_band_title }}</h2>
+      <p>{{ home_copy.cta_band_text }}</p>
+    </div>
+    <a href="{{ company_whatsapp }}" class="btn">{{ home_copy.cta_band_btn }}</a>
+  </div>
+</section>
+{% endblock %}

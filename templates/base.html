@@ -1,0 +1,43 @@
+{% load static %}
+<!doctype html>
+<html lang="{% if lang == 'ar' %}ar{% else %}en-AE{% endif %}" dir="{{ dir|default:'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% if meta_title %}{{ meta_title }}{% else %}{{ site_name }}{% endif %}</title>
+  <meta name="description" content="{{ meta_description|default:'Al Wahda Building Materials Trading - UAE supplier for construction and industrial materials.' }}">
+  <meta name="keywords" content="{{ meta_keywords|default:'building materials UAE, construction tools Dubai' }}">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ canonical_path|default:'/' }}{{ lang_suffix|default:'' }}">
+  <meta property="og:site_name" content="{{ site_name }}">
+  <meta property="og:type" content="{{ og_type|default:'website' }}">
+  <meta property="og:title" content="{{ meta_title|default:site_name }}">
+  <meta property="og:description" content="{{ meta_description|default:'' }}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ meta_title|default:site_name }}">
+  <meta name="twitter:description" content="{{ meta_description|default:'' }}">
+  <meta name="theme-color" content="#14142f">
+  <link rel="alternate" hreflang="en-ae" href="{{ request.scheme }}://{{ request.get_host }}{{ canonical_path|default:'/' }}">
+  <link rel="alternate" hreflang="ar-ae" href="{{ request.scheme }}://{{ request.get_host }}{{ canonical_path|default:'/' }}?lang=ar">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="{% static 'js/site.js' %}"></script>
+
+  {% if schema %}
+  <script type="application/ld+json">{{ schema|safe }}</script>
+  {% endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  {% include 'includes/header.html' %}
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+  {% include 'includes/footer.html' %}
+</body>
+</html>

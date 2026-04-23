@@ -1,0 +1,25 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h2>Al Wahda</h2>
+      <p>{% if lang == 'ar' %}توريد مواد البناء والمواد الصناعية من أم القيوين إلى دبي ومختلف مناطق الإمارات.{% else %}Construction and industrial material supply from Umm Al Quwain, serving Dubai and all major UAE project zones.{% endif %}</p>
+    </div>
+    <div>
+      <h3>{% if lang == 'ar' %}التواصل{% else %}Contact{% endif %}</h3>
+      <p><a href="tel:{{ company_phone|cut:' ' }}">{{ company_phone }}</a></p>
+      <p><a href="mailto:{{ company_email }}">{{ company_email }}</a></p>
+      <p>{{ company_address }}</p>
+      <p>Instagram: <a href="https://instagram.com/{{ instagram_handle }}">@{{ instagram_handle }}</a></p>
+    </div>
+    <div>
+      <h3>{% if lang == 'ar' %}روابط سريعة{% else %}Quick Links{% endif %}</h3>
+      <p><a href="/products/{{ lang_suffix }}">{% if lang == 'ar' %}المنتجات{% else %}Products{% endif %}</a></p>
+      <p><a href="/industries/{{ lang_suffix }}">{% if lang == 'ar' %}القطاعات{% else %}Industries{% endif %}</a></p>
+      <p><a href="/resources/{{ lang_suffix }}">{% if lang == 'ar' %}الموارد{% else %}Resources{% endif %}</a></p>
+      <p><a href="/contact/{{ lang_suffix }}">{% if lang == 'ar' %}تواصل{% else %}Contact{% endif %}</a></p>
+    </div>
+  </div>
+  <div class="container footnote">
+    <small>{% if lang == 'ar' %}© {% now "Y" %} الوحدة لمواد البناء. جميع الحقوق محفوظة.{% else %}© {% now "Y" %} Al Wahda Building Materials Trading. All rights reserved.{% endif %}</small>
+  </div>
+</footer>

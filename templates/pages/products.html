@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">{{ page_copy.eyebrow }}</p>
+    <h1>{{ page_copy.title }}</h1>
+    <p class="lead">{{ page_copy.lead }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container product-list">
+    {% for category in product_categories %}
+    <article id="{{ category.slug }}" class="product-block">
+      <h2>{% if lang == 'ar' %}{{ category.name_ar }}{% else %}{{ category.name_en }}{% endif %}</h2>
+      <p>{% if lang == 'ar' %}{{ category.summary_ar }}{% else %}{{ category.summary_en }}{% endif %}</p>
+      <div class="chip-row">
+        {% if lang == 'ar' %}
+        {% for item in category.items_ar %}
+        <span class="chip">{{ item }}</span>
+        {% endfor %}
+        {% else %}
+        {% for item in category.items_en %}
+        <span class="chip">{{ item }}</span>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container split-callout">
+    <div>
+      <h2>{{ page_copy.callout_title }}</h2>
+      <p>{{ page_copy.callout_text }}</p>
+    </div>
+    <a href="/contact/{{ lang_suffix }}" class="btn">{{ page_copy.callout_btn }}</a>
+  </div>
+</section>
+{% endblock %}

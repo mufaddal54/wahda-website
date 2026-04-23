@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">{{ page_copy.eyebrow }}</p>
+    <h1>{{ page_copy.title }}</h1>
+    <p class="lead">{{ page_copy.lead }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container industry-grid">
+    {% for industry in industries %}
+    <article class="industry-card">
+      <h2>{{ industry }}</h2>
+      <p>{{ page_copy.card_text }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>{{ page_copy.cta_title }}</h2>
+      <p>{{ page_copy.cta_text }}</p>
+    </div>
+    <a href="/contact/{{ lang_suffix }}" class="btn">{{ page_copy.cta_btn }}</a>
+  </div>
+</section>
+{% endblock %}

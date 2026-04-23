@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero article-hero">
+  <div class="container narrow">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/{{ lang_suffix }}">{{ page_copy.home }}</a>
+      <span>/</span>
+      <a href="/resources/{{ lang_suffix }}">{{ page_copy.resources }}</a>
+      <span>/</span>
+      <span aria-current="page">{{ resource_title }}</span>
+    </nav>
+    <p class="eyebrow">{{ resource.category }}</p>
+    <h1>{{ resource_title }}</h1>
+    <p class="lead">{{ resource_description }}</p>
+    <p class="meta">{{ resource.date|date:'d M Y' }} · {{ resource.reading_time }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow article-body">
+    {{ resource_body_html|safe }}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container narrow">
+    <h2>{{ page_copy.related }}</h2>
+    <div class="resource-grid">
+      {% for item in similar_items %}
+      <article class="resource-card">
+        <h3><a href="/resources/{{ item.slug }}/{{ lang_suffix }}">{{ item.title }}</a></h3>
+        <p>{{ item.description }}</p>
+      </article>
+      {% empty %}
+      <article class="resource-card"><p>{{ page_copy.empty_related }}</p></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
